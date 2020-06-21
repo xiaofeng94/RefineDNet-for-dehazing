@@ -20,7 +20,7 @@ In the second stage, it improves the realness of preliminary results from the fi
 ## Test on BeDDE
 1. Download BeDDE [here](https://github.com/xiaofeng94/BeDDE-for-defogging). 
 
-2. Download the pretrained [model]() (coming soon)
+2. Download the pretrained model [here]() (coming soon).
 
 3. Create a folder named `checkpoints`, and unzip the pretained model in `./checkpoints`.
 Now, your directory tree should look like
@@ -37,9 +37,9 @@ Now, your directory tree should look like
 ```
 4. Run the following command from <RefineDNet_root>.
 ```
-python3 test_BeDDE.py --dataroot <BeDDE_root> --dataset_mode simple_bedde --bedde_list ./datasets/BeDDE/bedde_list.txt --name refined_DCP_outdoor --model refined_DCP --phase test --preprocess none --save_image --method_name refined_DCP_outdoor_ep_60 --epoch 60
+python test_BeDDE.py --dataroot <BeDDE_root> --dataset_mode simple_bedde --bedde_list ./datasets/BeDDE/bedde_list.txt --name refined_DCP_outdoor --model refined_DCP --phase test --preprocess none --save_image --method_name refined_DCP_outdoor_ep_60 --epoch 60
 ```
-The results will be saved in `<BeDDE_root>/refined_DCP_outdoor_ep_60`.
+The results will be saved in `<BeDDE_root>/<city_name>/refined_DCP_outdoor_ep_60`.
 
 # Training
 ## Train RefineDNet on RESIDE-unpaired
@@ -59,7 +59,7 @@ your directory tree should look like
 
 3. Run the following command from <RefineDNet_root>.
 ```
-python3 train.py --dataroot ./datasets/RESIDE-unpaired --dataset_mode unpaired --model refined_DCP --netR_T unet_trans_256 --netR_J resnet_9blocks --name refined_DCP_3 --niter 30 --niter_decay 60 --lr_decay_iters 10 --preprocess scale_min_and_crop --load_size 300 --crop_size 256 --num_threads 8 --save_epoch_freq 3 --lambda_G 0.05 --lambda_identity 1
+python train.py --dataroot ./datasets/RESIDE-unpaired --dataset_mode unpaired --model refined_DCP --netR_T unet_trans_256 --netR_J resnet_9blocks --name refined_DCP_3 --niter 30 --niter_decay 60 --lr_decay_iters 10 --preprocess scale_min_and_crop --load_size 300 --crop_size 256 --num_threads 8 --save_epoch_freq 3 --lambda_G 0.05 --lambda_identity 1
 ```
 
 # References
