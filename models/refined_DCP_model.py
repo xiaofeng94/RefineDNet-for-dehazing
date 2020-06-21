@@ -10,14 +10,13 @@ from util import util
 
 class RefinedDCPModel(BaseModel):
     """
-    This class implements the CycleGAN model, for learning image-to-image translation without paired data.
+    This class implements the RefineDNet model, for learning single image dehazing without paired data.
+    It adopts the basic backbone networks provided by CycleGAN.
 
-    The model training requires '--dataset_mode unaligned' dataset.
-    By default, it uses a '--netG resnet_9blocks' ResNet generator,
-    a '--netD basic' discriminator (PatchGAN introduced by pix2pix),
-    and a least-square GANs objective ('--gan_mode lsgan').
-
-    CycleGAN paper: https://arxiv.org/pdf/1703.10593.pdf
+    The model training requires '--dataset_mode unpaired' dataset.
+    By default, it uses a '--netR_T unet_trans_256' U-Net refiner,
+    a '--netR_J resnet_9blocks' ResNet refiner,
+    and a '--netD basic' discriminator (PatchGAN introduced by pix2pix).
     """
     @staticmethod
     def modify_commandline_options(parser, is_train=True):
@@ -44,7 +43,7 @@ class RefinedDCPModel(BaseModel):
         return parser
 
     def __init__(self, opt):
-        """Initialize the CycleGAN class.
+        """Initialize the RefineDNet class.
 
         Parameters:
             opt (Option class)-- stores all the experiment flags; needs to be a subclass of BaseOptions
@@ -66,7 +65,6 @@ class RefinedDCPModel(BaseModel):
 
         # define networks (both Generators and discriminators)
         self.netG_DCP = networks.init_net(networks.DCPDehazeGenerator(), gpu_ids=self.gpu_ids) # use default setting for DCP
-        # ngf = 6 as previous work
         self.netRefiner_T = networks.define_G(opt.input_nc+1, 1, opt.ngf, opt.netR_T, opt.norm,
                                         not opt.no_dropout, opt.init_type, opt.init_gain, self.gpu_ids)
         self.netRefiner_J = networks.define_G(opt.input_nc+opt.output_nc, opt.output_nc, opt.ngf, opt.netR_J, opt.norm,
@@ -93,6 +91,7 @@ class RefinedDCPModel(BaseModel):
             self.optimizers.append(self.optimizer_G)
             self.optimizers.append(self.optimizer_D)
 
+        # display the architecture of each part
         # print(self.netRefiner_T)
         # print(self.netRefiner_J)
         # if self.isTrain:
@@ -103,8 +102,6 @@ class RefinedDCPModel(BaseModel):
 
         Parameters:
             input (dict): include the data itself and its metadata information.
-
-        The option 'direction' can be used to swap domain A and domain B.
         """
         self.real_I = input['haze'].to(self.device) # [-1, 1]
         self.image_paths = input['paths']
@@ -126,7 +123,7 @@ class RefinedDCPModel(BaseModel):
 
         # reconstruct haze image
         shape = self.refine_J.shape
-        dcp_A_scale = self.dcp_A # (self.dcp_A - 0.5) / 0.5 # self.dcp_A
+        dcp_A_scale = self.dcp_A
         self.map_A = (dcp_A_scale).reshape((1,3,1,1)).repeat(1,1,shape[2],shape[3])
 
         refine_T_map = self.refine_T.repeat(1,3,1,1)
@@ -140,9 +137,6 @@ class RefinedDCPModel(BaseModel):
         This function wraps <forward> function in no_grad() so we don't save intermediate steps for backprop
         It also calls <compute_visuals> to produce additional visualization results
         """
-
-        # self.refine_J = self.dcp_J
-        # self.visual_names = ['refine_J']
         with torch.no_grad():
             self.forward()
             self.compute_visuals()
