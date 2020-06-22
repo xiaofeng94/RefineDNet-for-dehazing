@@ -67,7 +67,7 @@ Your directory tree should look like
 
 3. Run the following command from `<RefineDNet_root>`.
 ```
-python train.py --dataroot ./datasets/RESIDE-unpaired --dataset_mode unpaired --model refined_DCP --netR_T unet_trans_256 --netR_J resnet_9blocks --name refined_DCP_3 --niter 30 --niter_decay 60 --lr_decay_iters 10 --preprocess scale_min_and_crop --load_size 300 --crop_size 256 --num_threads 8 --save_epoch_freq 3 --lambda_G 0.05 --lambda_identity 1
+python train.py --dataroot ./datasets/RESIDE-unpaired --dataset_mode unpaired --model refined_DCP --name refined_DCP_outdoor --niter 30 --niter_decay 60 --lr_decay_iters 10 --preprocess scale_min_and_crop --load_size 300 --crop_size 256 --num_threads 8 --save_epoch_freq 3 --lambda_G 0.05 --lambda_identity 1
 ```
 ## Train RefineDNet on ITS (from RESIDE-standard)
 1. Download ITS [here](https://sites.google.com/view/reside-dehaze-datasets/reside-standard?authuser=0). Unzip hazy.zip and clear.zip into `<RefineDNet_root>/datasets/ITS`. 
@@ -88,6 +88,7 @@ Then, your directory tree should look like
 
 4. Run the following command from `<RefineDNet_root>`.
 ```
+python train.py --dataroot ./datasets/ITS --dataset_mode unpaired --model refined_DCP --name refined_DCP_indoor --niter 30 --niter_decay 60 --lr_decay_iters 5 --preprocess scale_width_and_crop --load_size 372 --crop_size 256 --num_threads 8 --save_epoch_freq 1 --lambda_G 0.05 --lambda_identity 1
 ```
 
 # Performance
