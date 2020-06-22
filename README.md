@@ -13,16 +13,12 @@ In the second stage, it improves the realness of preliminary results from the fi
 - pytorch (>= 1.1.0) with CUDA 9.0
 - torchvision (>=0.3.0)
 - numpy
-- scipy
-- skimage
 
 # Testing
-## Test on BeDDE
-1. Download BeDDE [here](https://github.com/xiaofeng94/BeDDE-for-defogging). 
+## Download the pretrained models.
+1. Get the model trained on RESIDE-unpaired [here]() (coming soon).
 
-2. Download the pretrained model [here]() (coming soon).
-
-3. Create a folder named `checkpoints`, and unzip the pretained model in `./checkpoints`.
+2. Create a folder named `checkpoints`, and unzip the pretained model in `./checkpoints`.
 Now, your directory tree should look like
 ```
 <RefineDNet_root>
@@ -35,11 +31,23 @@ Now, your directory tree should look like
 │   ...
 ...
 ```
-4. Run the following command from <RefineDNet_root>.
+## Quick test on real-world images
+1. Download the pretrained model on BeDDE.
+
+2. Run the following command from <RefineDNet_root>.
+```
+python3 quick_test.py --dataroot ./datasets/quick_test --dataset_mode single --name refined_DCP_outdoor --model refined_DCP --phase test --preprocess none --save_image --method_name refined_DCP_outdoor_ep_60 --epoch 60
+```
+The results will be saved in the folder `<RefineDNet_root>/datatsets/quick_test/refined_DCP_outdoor_ep_60`.
+
+## Test on BeDDE
+1. Download the pretrained model on BeDDE.
+
+2. Run the following command from <RefineDNet_root>.
 ```
 python test_BeDDE.py --dataroot <BeDDE_root> --dataset_mode simple_bedde --bedde_list ./datasets/BeDDE/bedde_list.txt --name refined_DCP_outdoor --model refined_DCP --phase test --preprocess none --save_image --method_name refined_DCP_outdoor_ep_60 --epoch 60
 ```
-The results will be saved in `<BeDDE_root>/<city_name>/refined_DCP_outdoor_ep_60`.
+The results will be saved in the folder `<BeDDE_root>/<city_name>/refined_DCP_outdoor_ep_60`.
 
 # Training
 ## Train RefineDNet on RESIDE-unpaired
@@ -61,6 +69,7 @@ your directory tree should look like
 ```
 python train.py --dataroot ./datasets/RESIDE-unpaired --dataset_mode unpaired --model refined_DCP --netR_T unet_trans_256 --netR_J resnet_9blocks --name refined_DCP_3 --niter 30 --niter_decay 60 --lr_decay_iters 10 --preprocess scale_min_and_crop --load_size 300 --crop_size 256 --num_threads 8 --save_epoch_freq 3 --lambda_G 0.05 --lambda_identity 1
 ```
-
+# Performance
+TODO
 # References
 TODO
