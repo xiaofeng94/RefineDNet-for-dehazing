@@ -1,11 +1,12 @@
-# Under construction
-# RefineDNet_for_dehazing
+# RefineDNet for dehazing
 
 RefineDNet is a two-stage dehazing framework which can be weakly supervised using real-world unpaired images. 
 That is, the training set never requires paired hazy and haze-free images coming from the same scene.
 
 In the first stage, it adopts DCP to restore visibility of the input hazy image. 
-In the second stage, it improves the realness of preliminary results from the first stage via CNNs.
+In the second stage, it improves the realness of preliminary results from the first stage via CNNs. 
+RefineDNet is outlined in the following figure, and more details can be found in the [paper]() (coming soon)
+![framework](https://github.com/xiaofeng94/RefineDNet_for_dehazing/blob/master/datasets/figures/framework_github.jpg)
 
 # Our Environment
 - Ubuntu 16.06
@@ -92,6 +93,11 @@ python train.py --dataroot ./datasets/ITS --dataset_mode unpaired --model refine
 ```
 
 # Performance
-TODO
-# References
-TODO
+Some dehazing samples from BeDDE and the Internet produced by various methods.
+![dehazing samples](https://github.com/xiaofeng94/RefineDNet_for_dehazing/blob/master/datasets/figures/outdoor_com_github.jpg)
+# Useful links
+1. [RESIDE dataset](https://sites.google.com/view/reside-dehaze-datasets/reside-standard?authuser=0)
+
+2. [BeDDE dataset](https://github.com/xiaofeng94/BeDDE-for-defogging)
+
+3. This code is based on [CycleGAN](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
