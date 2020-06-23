@@ -92,7 +92,7 @@ Then, your directory tree should look like
 python train.py --dataroot ./datasets/ITS --dataset_mode unpaired --model refined_DCP --name refined_DCP_indoor --niter 30 --niter_decay 60 --lr_decay_iters 5 --preprocess scale_width_and_crop --load_size 372 --crop_size 256 --num_threads 8 --save_epoch_freq 1
 ```
 
-# Performance
+# Results
 Some dehazing samples from BeDDE and the Internet produced by various methods.
 ![dehazing samples](https://github.com/xiaofeng94/RefineDNet_for_dehazing/blob/master/datasets/figures/outdoor_com_github.jpg)
 # Useful links
