@@ -94,7 +94,7 @@ python train.py --dataroot ./datasets/ITS --dataset_mode unpaired --model refine
 
 # Results
 Some dehazing samples from BeDDE and the Internet produced by various methods.
-![dehazing samples](https://github.com/xiaofeng94/RefineDNet_for_dehazing/blob/master/datasets/figures/outdoor_com_github.jpg)
+![dehazing samples](https://github.com/xiaofeng94/RefineDNet-for-dehazing/blob/master/datasets/figures/outdoor_com_github.jpg)
 # Useful links
 1. [RESIDE dataset](https://sites.google.com/view/reside-dehaze-datasets/reside-standard?authuser=0)
 
