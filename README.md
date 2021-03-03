@@ -5,7 +5,7 @@ That is, the training set never requires paired hazy and haze-free images coming
 
 In the first stage, it adopts DCP to restore visibility of the input hazy image. 
 In the second stage, it improves the realness of preliminary results from the first stage via CNNs. 
-RefineDNet is outlined in the following figure, and more details can be found in the [paper]() (coming soon)
+RefineDNet is outlined in the following figure, and more details can be found in the [paper](https://doi.org/10.1109/TIP.2021.3060873) (or [this link](https://sse.tongji.edu.cn/linzhang/files/RefineDNet_TIP.pdf)) titled as _RefineDNet: A Weakly Supervised Refinement Framework for Single Image Dehazing._ (Early Access in Trans. Image Process.)
 ![framework](https://github.com/xiaofeng94/RefineDNet-for-dehazing/blob/master/datasets/figures/framework_github.jpg)
 
 # Our Environment
