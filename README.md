@@ -17,9 +17,9 @@ RefineDNet is outlined in the following figure, and more details can be found in
 
 # Testing
 ## Download the pretrained models.
-1. Get the model trained on RESIDE-unpaired [here]() (coming soon).
+1. Get the model trained on RESIDE-unpaired on [Google drive]()(coming soon) or [BaiduYun Disk](https://pan.baidu.com/s/1pqy-Ka9b9xVaeumdNSZAWQ)(Key: bswu).
 
-2. Create a folder named `checkpoints`, and unzip the pretained model in `./checkpoints`.
+2. Create a folder named `checkpoints`, and unzip `refined_DCP_outdoor.zip` in `./checkpoints`.
 Now, your directory tree should look like
 ```
 <RefineDNet_root>
@@ -33,7 +33,7 @@ Now, your directory tree should look like
 ...
 ```
 ## Quick test on real-world images
-1. Download the pretrained model on BeDDE.
+1. Download the pretrained model on RESIDE-unpaired (see above).
 
 2. Run the following command from <RefineDNet_root>.
 ```
@@ -52,7 +52,7 @@ The results will be saved in the folder `<BeDDE_root>/<city_name>/refined_DCP_ou
 
 # Training
 ## Train RefineDNet on RESIDE-unpaired
-1. Download RESIDE-unpaired [here]() (comming soon), and unzip it in the folder <RefineDNet_root>/datasets.
+1. Download RESIDE-unpaired on [Google drive]() (comming soon) or [BaiduYun Disk](https://pan.baidu.com/s/1pqy-Ka9b9xVaeumdNSZAWQ)(Key: bswu). Unzip `RESIDE-unpaired.zip` in the folder <RefineDNet_root>/datasets.
 Your directory tree should look like
 ```
 <RefineDNet_root>
